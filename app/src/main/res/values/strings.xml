@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Pedometer</string>
+    <string name="today">today</string>
+    <string name="this_week"> week</string>
+    <string name="this_month"> month</string>
+    <string name="steps">steps</string>
+    <string name="steps_number">%d steps</string>
+    <string name="from_week_to_week">%s\n%s</string>
+    <string name="km">Km</string>
+    <string name="home">Home</string>
+    <string name="analytics">Details</string>
+    <string name="heart_path">M 58,17 C 52,7 42,0 30,0 C 13,0 0,13 0,30 C 0,63 18,68 58,106 C 98,68 116,63 116,30 C 116,13 103,0 86,0 C 74,0 64,7 58,17 z</string>
+    <string name="made_with">Made with</string>
+    <string name="active_days">Active days</string>
+    <string name="km_during_weekend">Weekend Km</string>
+    <string name="km_during_weekday">Weekday Km</string>
+    <string name="total">Total</string>
+    <string name="best_day">Best day</string>
+    <string name="worst_day">Worst day</string>
+    <string name="active_days_streak">Best active streak</string>
+    <string name="rest_days_streak">Best rest streak</string>
+    <string name="rest_days">Rest days</string>
+    <string name="average_daily_kilometers">Daily avg.</string>
+    <string name="average_weekday_kilometers">Weekday avg.</string>
+    <string name="average_weekend_kilometers">Weekend avg.</string>
+</resources>
