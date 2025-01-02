@@ -7,9 +7,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
-
-// Importa le classi dei tuoi repository, use case e data source
-import com.example.pedometer.data.HealthDataSource
+import com.example.pedometer.data.network.HealthDataSource
 import com.example.pedometer.data.HealthRepository
 import com.example.pedometer.feature.home.domain.ReadStepsUseCase
 import com.example.pedometer.domain.WriteStepsUseCase
@@ -19,14 +17,12 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 @InstallIn(SingletonComponent::class)
 object HealthModule {
 
-    // Fornisce il client di Health Connect
     @Provides
     @Singleton
     fun provideHealthConnectClient(@ApplicationContext context: Context): HealthConnectClient {
         return HealthConnectClient.getOrCreate(context)
     }
 
-    // Fornisce il data source
     @Provides
     @Singleton
     fun provideHealthDataSource(
@@ -35,7 +31,6 @@ object HealthModule {
         return HealthDataSource(healthConnectClient)
     }
 
-    // Fornisce il repository
     @Provides
     @Singleton
     fun provideHealthRepository(
@@ -44,7 +39,6 @@ object HealthModule {
         return HealthRepository(healthDataSource)
     }
 
-    // Fornisce il UseCase per leggere i passi
     @Provides
     @Singleton
     fun provideReadStepsUseCase(
@@ -53,7 +47,6 @@ object HealthModule {
         return ReadStepsUseCase(healthRepository)
     }
 
-    // Fornisce il UseCase per scrivere i passi
     @Provides
     @Singleton
     fun provideWriteStepsUseCase(

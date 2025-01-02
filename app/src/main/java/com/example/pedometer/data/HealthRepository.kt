@@ -1,6 +1,7 @@
 package com.example.pedometer.data
 
 
+import com.example.pedometer.data.network.HealthDataSource
 import com.example.pedometer.model.DayData
 import kotlinx.coroutines.flow.Flow
 import java.time.Instant
@@ -18,7 +19,7 @@ class HealthRepository @Inject constructor(private val dataSource: HealthDataSou
     }
 
     fun readAllSteps(period: Timeframe): Flow<List<DayData>> {
-        return dataSource.aggregateStepsInto(period)
+        return dataSource.readYearStepsAggregateByPeriod(period)
     }
 
     suspend fun addSteps(count: Long, startTime: Instant, endTime: Instant) {
