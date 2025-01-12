@@ -14,7 +14,6 @@ import com.example.pedometer.util.toStepsToday
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
-import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
 import javax.inject.Inject
@@ -40,7 +39,7 @@ class HomeViewModel @Inject constructor(
             .flatMapLatest { state ->
                 combine(
                     flowOf(state),
-                    readStepsUseCase(startOfMonth, Instant.now()),
+                    readStepsUseCase(),
                     topUseCase(state.timeSelected),
                 ) { currentState, steps, top ->
 

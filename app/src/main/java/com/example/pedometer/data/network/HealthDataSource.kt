@@ -23,27 +23,6 @@ import javax.inject.Inject
 
 class HealthDataSource @Inject constructor(private val healthConnectClient: HealthConnectClient) {
 
-    fun readSteps(startTime: Instant, endTime: Instant): Flow<List<DayData>> = flow {
-        val response = healthConnectClient.readRecords(
-            ReadRecordsRequest(
-                recordType = StepsRecord::class,
-                timeRangeFilter = TimeRangeFilter.between(startTime, endTime)
-            )
-        )
-        val result = response.records.distinctBy { it.startTime }
-            .groupBy { record ->
-                record.startTime.atZone(record.startZoneOffset).toLocalDate()
-            }.map { (date, dailyRecords) ->
-                val totalSteps = dailyRecords.sumOf { it.count }
-                DayData(
-                    date = date.atStartOfDay(ZoneId.systemDefault())
-                        .toLocalDateTime(),
-                    steps = totalSteps
-                )
-            }
-        emit(result)
-    }
-
     fun readMonthSteps(date: LocalDateTime): Flow<List<DayData>> = flow {
         val startTime =
             date.withDayOfMonth(1)

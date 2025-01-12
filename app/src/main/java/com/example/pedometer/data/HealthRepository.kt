@@ -10,10 +10,6 @@ import javax.inject.Inject
 
 class HealthRepository @Inject constructor(private val dataSource: HealthDataSource) {
 
-    fun getSteps(startTime: Instant, endTime: Instant): Flow<List<DayData>> {
-        return dataSource.readSteps(startTime, endTime)
-    }
-
     fun readMonthSteps(month: LocalDateTime): Flow<List<DayData>> {
         return dataSource.readMonthSteps(month)
     }
