@@ -10,7 +10,7 @@ class PermissionsUseCase @Inject constructor(
     private val healthConnectClient: HealthConnectClient
 ) {
 
-    suspend fun checkPermissions(): Boolean {
+    suspend operator fun invoke(): Boolean {
         val grantedPermissions = healthConnectClient.permissionController.getGrantedPermissions()
         val requiredPermissions = setOf(
             PERMISSION_READ_HEALTH_DATA_HISTORY,

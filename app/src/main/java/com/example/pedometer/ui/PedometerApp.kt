@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -16,17 +17,16 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.example.pedometer.feature.home.ui.RequestPermissionsUI
 import com.example.pedometer.feature.home.ui.components.background.movingStripesBackground
 import com.example.pedometer.navigation.NavigationHandler
 import com.example.pedometer.navigation.PedometerNavHost
 import com.example.pedometer.navigation.TopLevelDestination
 import com.example.pedometer.ui.AppUiIntent.BottomBarClick
-import com.example.pedometer.ui.AppUiIntent.ClearNavigationIntent
 import com.example.pedometer.ui.AppUiIntent.OnBackButtonClick
 import com.example.pedometer.ui.AppUiIntent.PermissionGranted
 import com.example.pedometer.ui.component.PedometerAppBar
 import com.example.pedometer.ui.component.PedometerBottomBar
+import com.example.pedometer.ui.component.RequestPermissions
 import com.example.pedometer.ui.theme.Purple40
 
 @Composable
@@ -46,13 +46,15 @@ fun PedometerApp(
             onEvent = viewModel::sendEvent,
         )
     } else {
-        RequestPermissionsUI(
-            requiredPermissions = setOf(
-                PERMISSION_READ_HEALTH_DATA_HISTORY,
-                HealthPermission.getReadPermission(StepsRecord::class)
-            )
-        ) { granted ->
-            viewModel.sendEvent(PermissionGranted(granted))
+        Surface {
+            RequestPermissions(
+                requiredPermissions = setOf(
+                    PERMISSION_READ_HEALTH_DATA_HISTORY,
+                    HealthPermission.getReadPermission(StepsRecord::class)
+                )
+            ) { granted ->
+                viewModel.sendEvent(PermissionGranted(granted))
+            }
         }
     }
 }
@@ -70,7 +72,7 @@ fun Content(
     NavigationHandler(
         navController = navController,
         navigationIntent = navigateTo,
-        onEvent = { onEvent(ClearNavigationIntent) },
+        onEvent = { onEvent(it) },
     )
     Scaffold(
         topBar = {

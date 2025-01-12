@@ -1,4 +1,4 @@
-package com.example.pedometer.feature.home.ui
+package com.example.pedometer.ui.component
 
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.foundation.layout.Arrangement
@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.health.connect.client.PermissionController
 
 @Composable
-fun RequestPermissionsUI(
+fun RequestPermissions(
     requiredPermissions: Set<String>,
     onPermissionsResult: (Boolean) -> Unit
 ) {
